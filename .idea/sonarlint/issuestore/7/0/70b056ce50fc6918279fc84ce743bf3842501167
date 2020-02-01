@@ -1,0 +1,7 @@
+
+tsquid:S2259"QA "NullPointerException" could be thrown; "listFilesForFolder()" can return null.(Ôô¥²ùÿÿÿÿ8¥àÉ€.
+squid:S13194"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Š²€ñ8ÔŞ‘€.
+Fsquid:S11488"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÔŞ‘€.
+Isquid:S1168:"+Return an empty collection instead of null.(¥¹ï8ÔŞ‘€.
+]squid:S37256":Replace this with a call to the "toFile().isFile()" method(”Ü§“ÿÿÿÿÿ8ÔŞ‘€.
+osquid:S2095&"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(üñú÷şÿÿÿÿ8Äï¼€.
