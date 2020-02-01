@@ -1,16 +1,16 @@
-package com.jza;
+package com.jza.models;
 
 public class Expense {
 
-	String dateOfAccounting;
-	String dateOfCurrency;
-	String entityDetails;
-	String entityBillNumber;
-	String title;
-	String amount;
-	String currency;
-	String refNumber;
-	String type;
+	public String dateOfAccounting;
+	public String dateOfCurrency;
+	public String entityDetails;
+	public String entityBillNumber;
+	public String title;
+	public String amount;
+	public String currency;
+	public String refNumber;
+	public String type;
 
 	public String getCSVformat() {
 		return dateOfAccounting + ", " + entityDetails + ", " + amount.replace(",", ".") + ", " + currency + ", " + type;
@@ -38,7 +38,9 @@ public class Expense {
 	public Expense(String dateOfAccounting, String dateOfCurrency, String entityDetails, String entityBillNumber, String title, String amount, String currency, String refNumber, String type) {
 		this.dateOfAccounting = dateOfAccounting;
 		this.dateOfCurrency = dateOfCurrency;
-		this.entityDetails = entityDetails;
+		if(entityDetails != null){
+			this.entityDetails = entityDetails.replaceAll("[0-9]","");
+		}
 		this.entityBillNumber = entityBillNumber;
 		this.title = title;
 		this.amount = amount;
