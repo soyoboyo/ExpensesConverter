@@ -16,18 +16,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FilesService {
-	final static String PERIOD = "jan20";
-	final static String FOLDER = "C:\\Users\\Jacek\\Downloads\\expenses\\";
-	final static String PERIOD_FOLDER = "C:\\Users\\Jacek\\Downloads\\expenses\\" + PERIOD;
-	final static File OUTPUT_FILE = new File(FOLDER + "\\" + PERIOD + ".csv");
+	private final static String PERIOD = "\\jan20";
+	private final static String FOLDER = "C:\\Users\\Jacek\\Downloads\\expenses\\";
+	private final static String PERIOD_FOLDER = "C:\\Users\\Jacek\\Downloads\\expenses" + PERIOD;
+	private final static File OUTPUT_FILE = new File(FOLDER + PERIOD + ".csv");
 
 	public static List<Path> getPaths() {
-		return listFilesForFolder(PERIOD_FOLDER).stream().filter(p -> p.toString().endsWith(".txt")).collect(Collectors.toCollection(ArrayList::new));
+		return new ArrayList<>(getPathsOfFiles(PERIOD_FOLDER));
 	}
 
-	public static List<Path> listFilesForFolder(String folder) {
+	public static List<Path> getPathsOfFiles(String folder) {
 		try (Stream<Path> paths = Files.walk(Paths.get(folder))) {
-			return paths.collect(Collectors.toCollection(ArrayList::new));
+			return paths.filter(p -> p.toString().endsWith(".txt")).collect(Collectors.toCollection(ArrayList::new));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

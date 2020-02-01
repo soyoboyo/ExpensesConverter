@@ -26,11 +26,12 @@ public class ExpensesService {
 	private static List<Expense> getExpensesFromFile(Path path) throws IOException {
 		List<Expense> expenses = new ArrayList<>();
 		File inputFile = new File(path.toString(), "");
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8));
-		String st = br.readLine(); // skip first line with columns names
-		while ((st = br.readLine()) != null) {
-			List<String> fields = removeBlanks(Arrays.asList(st.split("\t")));
-			expenses.add(ExpenseFactory.createExpense(fields));
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8))) {
+			String st = br.readLine(); // skip first line with columns names
+			while ((st = br.readLine()) != null) {
+				List<String> fields = removeBlanks(Arrays.asList(st.split("\t")));
+				expenses.add(ExpenseFactory.createExpense(fields));
+			}
 		}
 		return expenses;
 	}

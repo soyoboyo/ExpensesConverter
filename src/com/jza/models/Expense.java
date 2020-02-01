@@ -13,11 +13,24 @@ public class Expense {
 	public String type;
 
 	public String getCSVformat() {
-		return dateOfAccounting + ", " + entityDetails + ", " + amount.replace(",", ".") + ", " + currency + ", " + type;
+		return formatDate(dateOfAccounting) + ", " + formatDetails(entityDetails) + ", " + amount.replace(",", ".") + ", " + currency.replaceAll(",", ".") + ", " + type;
 	}
 
 	private String formatDate(String date) {
 		return date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
+	}
+
+	private String formatDetails(String date) {
+		if (entityDetails != null) {
+			return entityDetails.replaceAll("[0-9]", "");
+		}
+		return null;
+	}
+
+	public Expense(String dateOfAccounting, String dateOfCurrency, String type) {
+		this.dateOfAccounting = dateOfAccounting;
+		this.dateOfCurrency = dateOfCurrency;
+		this.type = type;
 	}
 
 	@Override
@@ -33,19 +46,5 @@ public class Expense {
 				", refNumber='" + refNumber + '\'' +
 				", type='" + type + '\'' +
 				'}';
-	}
-
-	public Expense(String dateOfAccounting, String dateOfCurrency, String entityDetails, String entityBillNumber, String title, String amount, String currency, String refNumber, String type) {
-		this.dateOfAccounting = dateOfAccounting;
-		this.dateOfCurrency = dateOfCurrency;
-		if(entityDetails != null){
-			this.entityDetails = entityDetails.replaceAll("[0-9]","");
-		}
-		this.entityBillNumber = entityBillNumber;
-		this.title = title;
-		this.amount = amount;
-		this.currency = currency;
-		this.refNumber = refNumber;
-		this.type = type;
 	}
 }
